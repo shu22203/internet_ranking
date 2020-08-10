@@ -5,10 +5,10 @@ import (
 	"testing"
 )
 
-type MockSectionChallenges ChallengeResult
+type MockSectionChallenges ChallengeResults
 
-func (mas MockSectionChallenges) AggregateSubmissions() ChallengeResult {
-	return ChallengeResult(mas)
+func (mas MockSectionChallenges) AggregateSubmissions() ChallengeResults {
+	return ChallengeResults(mas)
 }
 
 func TestAggregateChallengeResults(t *testing.T) {
@@ -20,7 +20,7 @@ func TestAggregateChallengeResults(t *testing.T) {
 
 		section := Section{
 			SectionChallenges: MockSectionChallenges(
-				ChallengeResult{
+				ChallengeResults{
 					challengeId1: {
 						user1Id: 12,
 						user2Id: 15,

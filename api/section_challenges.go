@@ -1,7 +1,7 @@
 package main
 
 type SectionChallenges interface {
-	AggregateSubmissions() ChallengeResult
+	AggregateSubmissions() ChallengeResults
 }
 
-type ChallengeResult map[ChallengeId]map[UserId]int
+type ChallengeResults map[ChallengeId]map[UserId]int
