@@ -2,39 +2,40 @@ package challenge
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/shu22203/internet_ranking/user"
 	"testing"
 )
 
 func TestAdpotedSubmissions(t *testing.T) {
 	t.Run("同一userの提出は課題スコアが最も高い提出を採用する", func(t *testing.T) {
-		userId := NewUserId()
+		userId := user.NewUserId()
 		challenge := Challenge{
-			submissions: []Submission{
+			Submissions: []Submission{
 				{
-					userId:         userId,
-					submissionType: SubmissionType{coefficient: 0.8},
-					score:          1000000,
+					UserId:         userId,
+					SubmissionType: SubmissionType{Coefficient: 0.8},
+					Score:          1000000,
 				},
 				{
-					userId:         userId,
-					submissionType: SubmissionType{coefficient: 0.9},
-					score:          980000,
+					UserId:         userId,
+					SubmissionType: SubmissionType{Coefficient: 0.9},
+					Score:          980000,
 				},
 				{
-					userId:         userId,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          950000,
+					UserId:         userId,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          950000,
 				},
 			},
 		}
 
-		expect := map[UserId]Submission{
+		expect := map[user.UserId]Submission{
 			userId: {
-				userId: userId,
-				submissionType: SubmissionType{
-					coefficient: 1.0,
+				UserId: userId,
+				SubmissionType: SubmissionType{
+					Coefficient: 1.0,
 				},
-				score: 950000,
+				Score: 950000,
 			},
 		}
 
@@ -46,52 +47,52 @@ func TestAdpotedSubmissions(t *testing.T) {
 
 func Test(t *testing.T) {
 	t.Run("課題スコアの順位に応じたポイントを与える", func(t *testing.T) {
-		userId1 := NewUserId()
-		userId2 := NewUserId()
-		userId3 := NewUserId()
-		userId4 := NewUserId()
-		userId5 := NewUserId()
-		userId6 := NewUserId()
-		userId7 := NewUserId()
+		userId1 := user.NewUserId()
+		userId2 := user.NewUserId()
+		userId3 := user.NewUserId()
+		userId4 := user.NewUserId()
+		userId5 := user.NewUserId()
+		userId6 := user.NewUserId()
+		userId7 := user.NewUserId()
 
 		challenge := Challenge{
-			maxPoint: 5,
-			minPoint: 0,
-			submissions: []Submission{
+			MaxPoint: 5,
+			MinPoint: 0,
+			Submissions: []Submission{
 				{
-					userId:         userId1,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          500,
+					UserId:         userId1,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          500,
 				},
 				{
-					userId:         userId2,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          400,
+					UserId:         userId2,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          400,
 				},
 				{
-					userId:         userId3,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          300,
+					UserId:         userId3,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          300,
 				},
 				{
-					userId:         userId4,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          300,
+					UserId:         userId4,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          300,
 				},
 				{
-					userId:         userId5,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          200,
+					UserId:         userId5,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          200,
 				},
 				{
-					userId:         userId6,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          100,
+					UserId:         userId6,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          100,
 				},
 				{
-					userId:         userId7,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          0,
+					UserId:         userId7,
+					SubmissionType: SubmissionType{Coefficient: 1.0},
+					Score:          0,
 				},
 			},
 		}

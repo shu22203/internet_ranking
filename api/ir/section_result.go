@@ -1,4 +1,4 @@
-package main
+package ir
 
 import (
 	"github.com/shu22203/internet_ranking/challenge"
