@@ -5,17 +5,15 @@ import (
 	"time"
 )
 
-type IrSections struct {
-	sections []Section
-}
+type IrSections []Section
 
 func (irs *IrSections) FirstStartAt() (time.Time, error) {
-	if len(irs.sections) == 0 {
+	if len(*irs) == 0 {
 		return time.Time{}, errors.New("sections is empty")
 	}
 
-	firstStartAt := irs.sections[0].startAt
-	for _, section := range irs.sections {
+	firstStartAt := (*irs)[0].startAt
+	for _, section := range *irs {
 		if section.startAt.Before(firstStartAt) {
 			firstStartAt = section.startAt
 		}
@@ -23,14 +21,13 @@ func (irs *IrSections) FirstStartAt() (time.Time, error) {
 
 	return firstStartAt, nil
 }
-
 func (irs *IrSections) LastEndAt() (time.Time, error) {
-	if len(irs.sections) == 0 {
+	if len(*irs) == 0 {
 		return time.Time{}, errors.New("sections is empty")
 	}
 
-	lastEndAt := irs.sections[0].endAt
-	for _, section := range irs.sections {
+	lastEndAt := (*irs)[0].endAt
+	for _, section := range *irs {
 		if section.endAt.After(lastEndAt) {
 			lastEndAt = section.endAt
 		}

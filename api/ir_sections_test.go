@@ -19,11 +19,9 @@ func timeMustParse(value string) time.Time {
 func TestFirstStartAt(t *testing.T) {
 	t.Run("部門が1つ以上存在するとき", func(t *testing.T) {
 		irs := IrSections{
-			sections: []Section{
-				{startAt: timeMustParse("2020/04/01 12:00:00")},
-				{startAt: timeMustParse("2020/04/01 10:00:00")},
-				{startAt: timeMustParse("2020/04/02 10:00:00")},
-			},
+			{startAt: timeMustParse("2020/04/01 12:00:00")},
+			{startAt: timeMustParse("2020/04/01 10:00:00")},
+			{startAt: timeMustParse("2020/04/02 10:00:00")},
 		}
 		actual, err := irs.FirstStartAt()
 
@@ -37,9 +35,7 @@ func TestFirstStartAt(t *testing.T) {
 	})
 
 	t.Run("部門が存在しないとき", func(t *testing.T) {
-		irs := IrSections{
-			sections: []Section{},
-		}
+		irs := IrSections{}
 		_, err := irs.FirstStartAt()
 
 		t.Run("errorを返す", func(t *testing.T) {
@@ -51,11 +47,9 @@ func TestFirstStartAt(t *testing.T) {
 func TestLastEndAt(t *testing.T) {
 	t.Run("部門が1つ以上存在するとき", func(t *testing.T) {
 		irs := IrSections{
-			sections: []Section{
-				{endAt: timeMustParse("2020/04/01 12:00:00")},
-				{endAt: timeMustParse("2020/04/01 10:00:00")},
-				{endAt: timeMustParse("2020/04/02 10:00:00")},
-			},
+			{endAt: timeMustParse("2020/04/01 12:00:00")},
+			{endAt: timeMustParse("2020/04/01 10:00:00")},
+			{endAt: timeMustParse("2020/04/02 10:00:00")},
 		}
 		actual, err := irs.LastEndAt()
 
@@ -69,9 +63,7 @@ func TestLastEndAt(t *testing.T) {
 	})
 
 	t.Run("部門が存在しないとき", func(t *testing.T) {
-		irs := IrSections{
-			sections: []Section{},
-		}
+		irs := IrSections{}
 		_, err := irs.LastEndAt()
 
 		t.Run("errorを返す", func(t *testing.T) {
