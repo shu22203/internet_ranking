@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/google/uuid"
+	"sort"
 )
 
 type ChallengeId uuid.UUID
@@ -11,7 +12,34 @@ func NewChallengeId() ChallengeId {
 }
 
 type Challenge struct {
+	maxPoint    int
+	minPoint    int
 	submissions []Submission
+}
+
+func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
+	ss := []Submission{}
+	for _, s := range c.AdoptedSubmissions() {
+		ss = append(ss, s)
+	}
+	sort.Slice(ss, func(i, j int) bool {
+		return ss[i].ChallengeScore() > ss[j].ChallengeScore()
+	})
+
+	ret := make(map[UserId]int)
+	for i, sub := range ss {
+		ret[sub.userId] = c.maxPoint - i
+
+		if ret[sub.userId] < c.minPoint {
+			ret[sub.userId] = c.minPoint
+		}
+
+		if i != 0 && sub.ChallengeScore() == ss[i-1].ChallengeScore() {
+			ret[sub.userId] = ret[ss[i-1].userId]
+		}
+	}
+
+	return ret
 }
 
 func (c *Challenge) AdoptedSubmissions() map[UserId]Submission {
