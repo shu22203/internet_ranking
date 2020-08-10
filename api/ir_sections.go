@@ -21,6 +21,7 @@ func (irs *IrSections) FirstStartAt() (time.Time, error) {
 
 	return firstStartAt, nil
 }
+
 func (irs *IrSections) LastEndAt() (time.Time, error) {
 	if len(*irs) == 0 {
 		return time.Time{}, errors.New("sections is empty")
