@@ -19,23 +19,23 @@ type Challenge struct {
 
 func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
 	ss := []Submission{}
-	for _, s := range c.AdoptedSubmissions() {
-		ss = append(ss, s)
+	for _, as := range c.AdoptedSubmissions() {
+		ss = append(ss, as)
 	}
 	sort.Slice(ss, func(i, j int) bool {
 		return ss[i].ChallengeScore() > ss[j].ChallengeScore()
 	})
 
 	ret := make(map[UserId]int)
-	for i, sub := range ss {
-		ret[sub.userId] = c.maxPoint - i
+	for i, s := range ss {
+		ret[s.userId] = c.maxPoint - i
 
-		if ret[sub.userId] < c.minPoint {
-			ret[sub.userId] = c.minPoint
+		if ret[s.userId] < c.minPoint {
+			ret[s.userId] = c.minPoint
 		}
 
-		if i != 0 && sub.ChallengeScore() == ss[i-1].ChallengeScore() {
-			ret[sub.userId] = ret[ss[i-1].userId]
+		if i != 0 && s.ChallengeScore() == ss[i-1].ChallengeScore() {
+			ret[s.userId] = ret[ss[i-1].userId]
 		}
 	}
 
