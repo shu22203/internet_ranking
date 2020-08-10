@@ -1,6 +1,8 @@
 package main
 
 import (
+	"github.com/shu22203/internet_ranking/challenge"
+	"github.com/shu22203/internet_ranking/user"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
@@ -13,10 +15,10 @@ func (mas MockSectionChallenges) AggregateSubmissions() ChallengeResults {
 
 func TestAggregateChallengeResults(t *testing.T) {
 	t.Run("同一userの課題結果は一つの個人部門結果に統合される", func(t *testing.T) {
-		user1Id := NewUserId()
-		user2Id := NewUserId()
-		challengeId1 := NewChallengeId()
-		challengeId2 := NewChallengeId()
+		user1Id := user.NewUserId()
+		user2Id := user.NewUserId()
+		challengeId1 := challenge.NewChallengeId()
+		challengeId2 := challenge.NewChallengeId()
 
 		section := Section{
 			SectionChallenges: MockSectionChallenges(

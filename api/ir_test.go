@@ -1,12 +1,13 @@
 package main
 
 import (
+	"github.com/shu22203/internet_ranking/user"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestHoldInternetRanking(t *testing.T) {
-	user := NewUser()
+	user := user.NewUser()
 	ir := HoldInternetRanking(user)
 
 	t.Run("開催したuserはIRのadminになる", func(t *testing.T) {

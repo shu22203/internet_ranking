@@ -1,7 +1,8 @@
-package main
+package challenge
 
 import (
 	"github.com/google/uuid"
+	"github.com/shu22203/internet_ranking/user"
 	"sort"
 )
 
@@ -12,12 +13,12 @@ func NewChallengeId() ChallengeId {
 }
 
 type Challenge struct {
-	maxPoint    int
-	minPoint    int
-	submissions []Submission
+	MaxPoint    int
+	MinPoint    int
+	Submissions []Submission
 }
 
-func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
+func (c *Challenge) AwardPointsToSubmitters() map[user.UserId]int {
 	ss := []Submission{}
 	for _, as := range c.AdoptedSubmissions() {
 		ss = append(ss, as)
@@ -26,24 +27,24 @@ func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
 		return ss[i].ChallengeScore() > ss[j].ChallengeScore()
 	})
 
-	ret := make(map[UserId]int)
+	ret := make(map[user.UserId]int)
 	for i, s := range ss {
-		ret[s.userId] = c.maxPoint - i
+		ret[s.UserId] = c.MaxPoint - i
 
-		if ret[s.userId] < c.minPoint {
-			ret[s.userId] = c.minPoint
+		if ret[s.UserId] < c.MinPoint {
+			ret[s.UserId] = c.MinPoint
 		}
 
 		if i != 0 && s.ChallengeScore() == ss[i-1].ChallengeScore() {
-			ret[s.userId] = ret[ss[i-1].userId]
+			ret[s.UserId] = ret[ss[i-1].UserId]
 		}
 	}
 
 	return ret
 }
 
-func (c *Challenge) AdoptedSubmissions() map[UserId]Submission {
-	ret := make(map[UserId]Submission)
+func (c *Challenge) AdoptedSubmissions() map[user.UserId]Submission {
+	ret := make(map[user.UserId]Submission)
 	for k, v := range c.eachUserSubmissions() {
 		maxCs := v[0].ChallengeScore()
 		ret[k] = v[0]
@@ -59,15 +60,15 @@ func (c *Challenge) AdoptedSubmissions() map[UserId]Submission {
 	return ret
 }
 
-func (c *Challenge) eachUserSubmissions() map[UserId][]Submission {
-	ret := make(map[UserId][]Submission)
-	for _, s := range c.submissions {
-		v, ok := ret[s.userId]
+func (c *Challenge) eachUserSubmissions() map[user.UserId][]Submission {
+	ret := make(map[user.UserId][]Submission)
+	for _, s := range c.Submissions {
+		v, ok := ret[s.UserId]
 
 		if ok {
-			ret[s.userId] = append(v, s)
+			ret[s.UserId] = append(v, s)
 		} else {
-			ret[s.userId] = []Submission{s}
+			ret[s.UserId] = []Submission{s}
 		}
 	}
 

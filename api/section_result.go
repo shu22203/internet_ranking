@@ -1,16 +1,21 @@
 package main
 
-type SectionResult map[UserId]*SectionIndividualResult
+import (
+	"github.com/shu22203/internet_ranking/challenge"
+	"github.com/shu22203/internet_ranking/user"
+)
 
-type SectionIndividualResult map[ChallengeId]int
+type SectionResult map[user.UserId]*SectionIndividualResult
 
-func newIndividualSectionResult(cid ChallengeId, point int) *SectionIndividualResult {
+type SectionIndividualResult map[challenge.ChallengeId]int
+
+func newIndividualSectionResult(cid challenge.ChallengeId, point int) *SectionIndividualResult {
 	return &SectionIndividualResult{
 		cid: point,
 	}
 }
 
-func (sir *SectionIndividualResult) add(cid ChallengeId, point int) {
+func (sir *SectionIndividualResult) add(cid challenge.ChallengeId, point int) {
 	(*sir)[cid] = point
 }
 

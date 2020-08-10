@@ -1,69 +1,71 @@
 package main
 
 import (
+	"github.com/shu22203/internet_ranking/challenge"
+	"github.com/shu22203/internet_ranking/user"
 	"github.com/stretchr/testify/assert"
 	"testing"
 )
 
 func TestAggregateSubmissions(t *testing.T) {
-	userId1 := NewUserId()
-	userId2 := NewUserId()
-	userId3 := NewUserId()
-	challengeId1 := NewChallengeId()
-	challengeId2 := NewChallengeId()
-	challengeId3 := NewChallengeId()
+	userId1 := user.NewUserId()
+	userId2 := user.NewUserId()
+	userId3 := user.NewUserId()
+	challengeId1 := challenge.NewChallengeId()
+	challengeId2 := challenge.NewChallengeId()
+	challengeId3 := challenge.NewChallengeId()
 
 	scs := SectionChallengesImpl{
 		challengeId1: {
-			maxPoint: 10,
-			minPoint: 0,
-			submissions: []Submission{
+			MaxPoint: 10,
+			MinPoint: 0,
+			Submissions: []challenge.Submission{
 				{
-					userId: userId1,
-					submissionType: SubmissionType{coefficient: 0.9},
-					score: 1000000,
+					UserId:         userId1,
+					SubmissionType: challenge.SubmissionType{Coefficient: 0.9},
+					Score:          1000000,
 				},
 				{
-					userId: userId2,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score: 1000000,
+					UserId:         userId2,
+					SubmissionType: challenge.SubmissionType{Coefficient: 1.0},
+					Score:          1000000,
 				},
 				{
-					userId: userId3,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score: 850000,
+					UserId:         userId3,
+					SubmissionType: challenge.SubmissionType{Coefficient: 1.0},
+					Score:          850000,
 				},
 			},
 		},
 		challengeId2: {
-			maxPoint: 10,
-			minPoint: 0,
-			submissions: []Submission{
+			MaxPoint: 10,
+			MinPoint: 0,
+			Submissions: []challenge.Submission{
 				{
-					userId: userId1,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score: 1000000,
+					UserId:         userId1,
+					SubmissionType: challenge.SubmissionType{Coefficient: 1.0},
+					Score:          1000000,
 				},
 				{
-					userId: userId3,
-					submissionType: SubmissionType{coefficient: 0.9},
-					score: 850000,
+					UserId:         userId3,
+					SubmissionType: challenge.SubmissionType{Coefficient: 0.9},
+					Score:          850000,
 				},
 			},
 		},
 		challengeId3: {
-			maxPoint: 5,
-			minPoint: 5,
-			submissions: []Submission{
+			MaxPoint: 5,
+			MinPoint: 5,
+			Submissions: []challenge.Submission{
 				{
-					userId: userId1,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score: 1,
+					UserId:         userId1,
+					SubmissionType: challenge.SubmissionType{Coefficient: 1.0},
+					Score:          1,
 				},
 				{
-					userId: userId2,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score: 1,
+					UserId:         userId2,
+					SubmissionType: challenge.SubmissionType{Coefficient: 1.0},
+					Score:          1,
 				},
 			},
 		},

@@ -1,21 +1,25 @@
 package main
 
+import (
+	"github.com/shu22203/internet_ranking/user"
+)
+
 type IrAdminIds struct {
-	ownerId  UserId
-	adminIds []UserId
+	ownerId  user.UserId
+	adminIds []user.UserId
 }
 
-func NewIrAdminIds(owner *User) IrAdminIds {
+func NewIrAdminIds(owner *user.User) IrAdminIds {
 	return IrAdminIds{
 		ownerId:  owner.Id,
-		adminIds: []UserId{},
+		adminIds: []user.UserId{},
 	}
 }
 
-func (ira *IrAdminIds) AdminIds() []UserId {
-	return append([]UserId{ira.ownerId}, ira.adminIds...)
+func (ira *IrAdminIds) AdminIds() []user.UserId {
+	return append([]user.UserId{ira.ownerId}, ira.adminIds...)
 }
 
-func (ira *IrAdminIds) OwnerId() UserId {
+func (ira *IrAdminIds) OwnerId() user.UserId {
 	return ira.ownerId
 }
