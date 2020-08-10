@@ -31,11 +31,11 @@ func TestAggregateChallengeResults(t *testing.T) {
 		section := Section{
 			AbleToAggregateSubmissions: MockAggregateSubmissions(
 				ChallengeResult{
-					challengeId1: map[UserId]int{
+					challengeId1: {
 						user1Id: 12,
 						user2Id: 15,
 					},
-					challengeId2: map[UserId]int{
+					challengeId2: {
 						user1Id: 15,
 					},
 				},

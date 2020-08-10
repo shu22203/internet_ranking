@@ -11,7 +11,7 @@ func newIndividualSectionResult(cid ChallengeId, point int) *SectionIndividualRe
 }
 
 func (sir *SectionIndividualResult) add(cid ChallengeId, point int) {
-	map[ChallengeId]int(*sir)[cid] = point
+	(*sir)[cid] = point
 }
 
 func (sir *SectionIndividualResult) TotalPoint() int {
