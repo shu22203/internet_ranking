@@ -5,6 +5,24 @@ import (
 )
 
 type Section struct {
+	SectionChallenges
 	startAt time.Time
 	endAt   time.Time
+}
+
+func (s *Section) AggregateChallengeResults() SectionResult {
+	result := make(SectionResult)
+	for cid, cr := range s.AggregateSubmissions() {
+		for uid, point := range cr {
+			v, ok := result[uid]
+
+			if ok {
+				v.add(cid, point)
+			} else {
+				result[uid] = newIndividualSectionResult(cid, point)
+			}
+		}
+	}
+
+	return result
 }
