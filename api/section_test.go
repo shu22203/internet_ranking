@@ -5,9 +5,9 @@ import (
 	"testing"
 )
 
-type MockAggregateSubmissions ChallengeResult
+type MockSectionChallenges ChallengeResult
 
-func (mas MockAggregateSubmissions) AggregateSubmissions() ChallengeResult {
+func (mas MockSectionChallenges) AggregateSubmissions() ChallengeResult {
 	return ChallengeResult(mas)
 }
 
@@ -18,18 +18,8 @@ func TestAggregateChallengeResults(t *testing.T) {
 		challengeId1 := NewChallengeId()
 		challengeId2 := NewChallengeId()
 
-		expect := SectionResult{
-			user1Id: {
-				challengeId1: 12,
-				challengeId2: 15,
-			},
-			user2Id: {
-				challengeId1: 15,
-			},
-		}
-
 		section := Section{
-			AbleToAggregateSubmissions: MockAggregateSubmissions(
+			SectionChallenges: MockSectionChallenges(
 				ChallengeResult{
 					challengeId1: {
 						user1Id: 12,
@@ -42,8 +32,16 @@ func TestAggregateChallengeResults(t *testing.T) {
 			),
 		}
 
-		actual := section.AggregateChallengeResults()
+		expect := SectionResult{
+			user1Id: {
+				challengeId1: 12,
+				challengeId2: 15,
+			},
+			user2Id: {
+				challengeId1: 15,
+			},
+		}
 
-		assert.Equal(t, expect, actual)
+		assert.Equal(t, expect, section.AggregateChallengeResults())
 	})
 }

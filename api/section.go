@@ -5,9 +5,9 @@ import (
 )
 
 type Section struct {
+	SectionChallenges
 	startAt time.Time
 	endAt   time.Time
-	AbleToAggregateSubmissions
 }
 
 func (s *Section) AggregateChallengeResults() SectionResult {

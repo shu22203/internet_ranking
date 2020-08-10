@@ -1,10 +1,6 @@
 package main
 
 type SectionChallenges interface {
-	AbleToAggregateSubmissions
-}
-
-type AbleToAggregateSubmissions interface {
 	AggregateSubmissions() ChallengeResult
 }
 
