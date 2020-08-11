@@ -7,10 +7,10 @@ import (
 	"testing"
 )
 
-type MockSectionChallenges ChallengeResults
+type MockSectionChallenge challenge.ChallengeResult
 
-func (mas MockSectionChallenges) AggregateSubmissions() ChallengeResults {
-	return ChallengeResults(mas)
+func (msc MockSectionChallenge) AwardPointsToSubmitters() challenge.ChallengeResult {
+	return challenge.ChallengeResult(msc)
 }
 
 func TestAggregateChallengeResults(t *testing.T) {
@@ -21,17 +21,15 @@ func TestAggregateChallengeResults(t *testing.T) {
 		challengeId2 := challenge.NewChallengeId()
 
 		section := Section{
-			SectionChallenges: MockSectionChallenges(
-				ChallengeResults{
-					challengeId1: {
-						user1Id: 12,
-						user2Id: 15,
-					},
-					challengeId2: {
-						user1Id: 15,
-					},
+			challenges: map[challenge.ChallengeId]SectionChallenge{
+				challengeId1: MockSectionChallenge{
+					user1Id: 12,
+					user2Id: 15,
 				},
-			),
+				challengeId2: MockSectionChallenge{
+					user1Id: 15,
+				},
+			},
 		}
 
 		expect := SectionResult{
