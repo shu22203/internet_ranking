@@ -2,10 +2,9 @@ package ir
 
 import (
 	"github.com/shu22203/internet_ranking/challenge"
-	"github.com/shu22203/internet_ranking/user"
 )
 
-type ChallengeResults map[challenge.ChallengeId]map[user.UserId]int
+type ChallengeResults map[challenge.ChallengeId]challenge.ChallengeResult
 
 type SectionChallenges interface {
 	AggregateSubmissions() ChallengeResults

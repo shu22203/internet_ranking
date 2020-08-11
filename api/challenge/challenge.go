@@ -18,7 +18,9 @@ type Challenge struct {
 	Submissions []Submission
 }
 
-func (c *Challenge) AwardPointsToSubmitters() map[user.UserId]int {
+type ChallengeResult map[user.UserId]int
+
+func (c *Challenge) AwardPointsToSubmitters() ChallengeResult {
 	ss := []Submission{}
 	for _, as := range c.AdoptedSubmissions() {
 		ss = append(ss, as)
@@ -27,7 +29,7 @@ func (c *Challenge) AwardPointsToSubmitters() map[user.UserId]int {
 		return ss[i].ChallengeScore() > ss[j].ChallengeScore()
 	})
 
-	ret := make(map[user.UserId]int)
+	ret := make(ChallengeResult)
 	for i, s := range ss {
 		ret[s.UserId] = c.MaxPoint - i
 
