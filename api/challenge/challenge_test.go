@@ -12,19 +12,19 @@ func TestAdpotedSubmissions(t *testing.T) {
 		challenge := Challenge{
 			submissions: []Submission{
 				{
-					userId:         userId,
-					submissionType: SubmissionType{coefficient: 0.8},
-					score:          1000000,
+					userId: userId,
+					rule:   SubmissionRule{coefficient: 0.8},
+					score:  1000000,
 				},
 				{
-					userId:         userId,
-					submissionType: SubmissionType{coefficient: 0.9},
-					score:          980000,
+					userId: userId,
+					rule:   SubmissionRule{coefficient: 0.9},
+					score:  980000,
 				},
 				{
-					userId:         userId,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          950000,
+					userId: userId,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  950000,
 				},
 			},
 		}
@@ -32,7 +32,7 @@ func TestAdpotedSubmissions(t *testing.T) {
 		expect := map[user.UserId]Submission{
 			userId: {
 				userId: userId,
-				submissionType: SubmissionType{
+				rule: SubmissionRule{
 					coefficient: 1.0,
 				},
 				score: 950000,
@@ -60,39 +60,39 @@ func TestAwardPointsToSubmitters(t *testing.T) {
 			minPoint: 0,
 			submissions: []Submission{
 				{
-					userId:         userId1,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          500,
+					userId: userId1,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  500,
 				},
 				{
-					userId:         userId2,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          400,
+					userId: userId2,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  400,
 				},
 				{
-					userId:         userId3,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          300,
+					userId: userId3,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  300,
 				},
 				{
-					userId:         userId4,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          300,
+					userId: userId4,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  300,
 				},
 				{
-					userId:         userId5,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          200,
+					userId: userId5,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  200,
 				},
 				{
-					userId:         userId6,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          100,
+					userId: userId6,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  100,
 				},
 				{
-					userId:         userId7,
-					submissionType: SubmissionType{coefficient: 1.0},
-					score:          0,
+					userId: userId7,
+					rule:   SubmissionRule{coefficient: 1.0},
+					score:  0,
 				},
 			},
 		}
