@@ -10,7 +10,7 @@ func TestAdpotedSubmissions(t *testing.T) {
 	t.Run("同一userの提出は課題スコアが最も高い提出を採用する", func(t *testing.T) {
 		userId := user.NewUserId()
 		challenge := Challenge{
-			Submissions: []Submission{
+			submissions: []Submission{
 				{
 					UserId:         userId,
 					SubmissionType: SubmissionType{Coefficient: 0.8},
@@ -56,9 +56,9 @@ func Test(t *testing.T) {
 		userId7 := user.NewUserId()
 
 		challenge := Challenge{
-			MaxPoint: 5,
-			MinPoint: 0,
-			Submissions: []Submission{
+			maxPoint: 5,
+			minPoint: 0,
+			submissions: []Submission{
 				{
 					UserId:         userId1,
 					SubmissionType: SubmissionType{Coefficient: 1.0},

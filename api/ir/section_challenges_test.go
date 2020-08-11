@@ -20,15 +20,13 @@ func TestAggregateChallengeResults(t *testing.T) {
 		challengeId1 := challenge.NewChallengeId()
 		challengeId2 := challenge.NewChallengeId()
 
-		section := Section{
-			challenges: map[challenge.ChallengeId]SectionChallenge{
-				challengeId1: MockSectionChallenge{
-					user1Id: 12,
-					user2Id: 15,
-				},
-				challengeId2: MockSectionChallenge{
-					user1Id: 15,
-				},
+		challenges := SectionChallenges{
+			challengeId1: MockSectionChallenge{
+				user1Id: 12,
+				user2Id: 15,
+			},
+			challengeId2: MockSectionChallenge{
+				user1Id: 15,
 			},
 		}
 
@@ -42,6 +40,6 @@ func TestAggregateChallengeResults(t *testing.T) {
 			},
 		}
 
-		assert.Equal(t, expect, section.AggregateChallengeResults())
+		assert.Equal(t, expect, challenges.AggregateChallengeResults())
 	})
 }

@@ -13,9 +13,9 @@ func NewChallengeId() ChallengeId {
 }
 
 type Challenge struct {
-	MaxPoint    int
-	MinPoint    int
-	Submissions []Submission
+	maxPoint    int
+	minPoint    int
+	submissions []Submission
 }
 
 type ChallengeResult map[user.UserId]int
@@ -31,10 +31,10 @@ func (c *Challenge) AwardPointsToSubmitters() ChallengeResult {
 
 	ret := make(ChallengeResult)
 	for i, s := range ss {
-		ret[s.UserId] = c.MaxPoint - i
+		ret[s.UserId] = c.maxPoint - i
 
-		if ret[s.UserId] < c.MinPoint {
-			ret[s.UserId] = c.MinPoint
+		if ret[s.UserId] < c.minPoint {
+			ret[s.UserId] = c.minPoint
 		}
 
 		if i != 0 && s.ChallengeScore() == ss[i-1].ChallengeScore() {
@@ -64,7 +64,7 @@ func (c *Challenge) AdoptedSubmissions() map[user.UserId]Submission {
 
 func (c *Challenge) eachUserSubmissions() map[user.UserId][]Submission {
 	ret := make(map[user.UserId][]Submission)
-	for _, s := range c.Submissions {
+	for _, s := range c.submissions {
 		v, ok := ret[s.UserId]
 
 		if ok {
