@@ -45,7 +45,7 @@ func TestAdpotedSubmissions(t *testing.T) {
 	})
 }
 
-func Test(t *testing.T) {
+func TestAwardPointsToSubmitters(t *testing.T) {
 	t.Run("課題スコアの順位に応じたポイントを与える", func(t *testing.T) {
 		userId1 := user.NewUserId()
 		userId2 := user.NewUserId()
