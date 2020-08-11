@@ -1,7 +1,8 @@
-package main
+package challenge
 
 import (
 	"github.com/google/uuid"
+	"github.com/shu22203/internet_ranking/user"
 	"sort"
 )
 
@@ -17,7 +18,9 @@ type Challenge struct {
 	submissions []Submission
 }
 
-func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
+type ChallengeResult map[user.UserId]int
+
+func (c *Challenge) AwardPointsToSubmitters() ChallengeResult {
 	ss := []Submission{}
 	for _, as := range c.AdoptedSubmissions() {
 		ss = append(ss, as)
@@ -26,7 +29,7 @@ func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
 		return ss[i].ChallengeScore() > ss[j].ChallengeScore()
 	})
 
-	ret := make(map[UserId]int)
+	ret := make(ChallengeResult)
 	for i, s := range ss {
 		ret[s.userId] = c.maxPoint - i
 
@@ -42,8 +45,8 @@ func (c *Challenge) AwardPointsToSubmitters() map[UserId]int {
 	return ret
 }
 
-func (c *Challenge) AdoptedSubmissions() map[UserId]Submission {
-	ret := make(map[UserId]Submission)
+func (c *Challenge) AdoptedSubmissions() map[user.UserId]Submission {
+	ret := make(map[user.UserId]Submission)
 	for k, v := range c.eachUserSubmissions() {
 		maxCs := v[0].ChallengeScore()
 		ret[k] = v[0]
@@ -59,8 +62,8 @@ func (c *Challenge) AdoptedSubmissions() map[UserId]Submission {
 	return ret
 }
 
-func (c *Challenge) eachUserSubmissions() map[UserId][]Submission {
-	ret := make(map[UserId][]Submission)
+func (c *Challenge) eachUserSubmissions() map[user.UserId][]Submission {
+	ret := make(map[user.UserId][]Submission)
 	for _, s := range c.submissions {
 		v, ok := ret[s.userId]
 

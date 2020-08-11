@@ -1,13 +1,14 @@
-package main
+package challenge
 
 import (
 	"github.com/stretchr/testify/assert"
+	"github.com/shu22203/internet_ranking/user"
 	"testing"
 )
 
 func TestAdpotedSubmissions(t *testing.T) {
 	t.Run("同一userの提出は課題スコアが最も高い提出を採用する", func(t *testing.T) {
-		userId := NewUserId()
+		userId := user.NewUserId()
 		challenge := Challenge{
 			submissions: []Submission{
 				{
@@ -28,7 +29,7 @@ func TestAdpotedSubmissions(t *testing.T) {
 			},
 		}
 
-		expect := map[UserId]Submission{
+		expect := map[user.UserId]Submission{
 			userId: {
 				userId: userId,
 				submissionType: SubmissionType{
@@ -46,13 +47,13 @@ func TestAdpotedSubmissions(t *testing.T) {
 
 func Test(t *testing.T) {
 	t.Run("課題スコアの順位に応じたポイントを与える", func(t *testing.T) {
-		userId1 := NewUserId()
-		userId2 := NewUserId()
-		userId3 := NewUserId()
-		userId4 := NewUserId()
-		userId5 := NewUserId()
-		userId6 := NewUserId()
-		userId7 := NewUserId()
+		userId1 := user.NewUserId()
+		userId2 := user.NewUserId()
+		userId3 := user.NewUserId()
+		userId4 := user.NewUserId()
+		userId5 := user.NewUserId()
+		userId6 := user.NewUserId()
+		userId7 := user.NewUserId()
 
 		challenge := Challenge{
 			maxPoint: 5,

@@ -1,11 +1,15 @@
-package main
+package challenge
+
+import (
+	"github.com/shu22203/internet_ranking/user"
+)
 
 type SubmissionType struct {
 	coefficient float64
 }
 
 type Submission struct {
-	userId         UserId
+	userId         user.UserId
 	submissionType SubmissionType
 	score          int
 }
