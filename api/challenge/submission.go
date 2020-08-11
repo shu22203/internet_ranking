@@ -5,15 +5,15 @@ import (
 )
 
 type SubmissionType struct {
-	Coefficient float64
+	coefficient float64
 }
 
 type Submission struct {
-	UserId         user.UserId
-	SubmissionType SubmissionType
-	Score          int
+	userId         user.UserId
+	submissionType SubmissionType
+	score          int
 }
 
 func (s *Submission) ChallengeScore() float64 {
-	return float64(s.Score) * s.SubmissionType.Coefficient
+	return float64(s.score) * s.submissionType.coefficient
 }

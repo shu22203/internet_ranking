@@ -31,14 +31,14 @@ func (c *Challenge) AwardPointsToSubmitters() ChallengeResult {
 
 	ret := make(ChallengeResult)
 	for i, s := range ss {
-		ret[s.UserId] = c.maxPoint - i
+		ret[s.userId] = c.maxPoint - i
 
-		if ret[s.UserId] < c.minPoint {
-			ret[s.UserId] = c.minPoint
+		if ret[s.userId] < c.minPoint {
+			ret[s.userId] = c.minPoint
 		}
 
 		if i != 0 && s.ChallengeScore() == ss[i-1].ChallengeScore() {
-			ret[s.UserId] = ret[ss[i-1].UserId]
+			ret[s.userId] = ret[ss[i-1].userId]
 		}
 	}
 
@@ -65,12 +65,12 @@ func (c *Challenge) AdoptedSubmissions() map[user.UserId]Submission {
 func (c *Challenge) eachUserSubmissions() map[user.UserId][]Submission {
 	ret := make(map[user.UserId][]Submission)
 	for _, s := range c.submissions {
-		v, ok := ret[s.UserId]
+		v, ok := ret[s.userId]
 
 		if ok {
-			ret[s.UserId] = append(v, s)
+			ret[s.userId] = append(v, s)
 		} else {
-			ret[s.UserId] = []Submission{s}
+			ret[s.userId] = []Submission{s}
 		}
 	}
 
